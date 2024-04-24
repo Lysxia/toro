@@ -1,0 +1,29 @@
+cabal-version:      3.4
+name:               toro
+version:            0.1.0.0
+-- synopsis:
+-- description:
+license:            MIT
+license-file:       LICENSE
+author:             Li-yao Xia
+maintainer:         lysxia@gmail.com
+-- copyright:
+category:           Control
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:
+      Toro.BluefinOverEffectful
+      Toro.EffectfulOverBluefin
+    build-depends:
+      bluefin,
+      effectful-core,
+      base ^>=4.16.4.0
+    hs-source-dirs:   src
+    default-language: Haskell2010
