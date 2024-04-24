@@ -23,6 +23,7 @@ library
       Toro.EffectfulOverBluefin
     build-depends:
       bluefin,
+      bluefin-internal,
       effectful-core,
       base ^>=4.16.4.0
     hs-source-dirs:   src
