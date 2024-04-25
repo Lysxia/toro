@@ -24,6 +24,7 @@ library
       Toro.BluefinExtras
       Toro.BluefinCont
       Toro.BluefinHandler
+      Toro.BluefinLib
     build-depends:
       bluefin,
       bluefin-internal,
