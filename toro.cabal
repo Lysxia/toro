@@ -22,10 +22,11 @@ library
       Toro.BluefinOverEffectful
       Toro.EffectfulOverBluefin
       Toro.BluefinExtras
+      Toro.BluefinCont
     build-depends:
       bluefin,
       bluefin-internal,
       effectful-core,
-      base ^>=4.16.4.0
+      base >=4.19
     hs-source-dirs:   src
     default-language: Haskell2010
