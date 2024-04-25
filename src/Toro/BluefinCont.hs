@@ -28,10 +28,8 @@ unsafeRunEff :: Eff ss a -> State# RealWorld -> (# State# RealWorld , a #)
 unsafeRunEff (UnsafeMkEff (IO f)) = f
 
 prompt :: forall a ss. (forall s. Prompt ss a s -> Eff (s :& ss) a) -> Eff ss a
-prompt f = unsafeMkEff (\z0 ->
-  let tag :: PromptTag# a
-      !(# z1, tag #) = newPromptTag# z0 in
-  prompt# tag (unsafeRunEff (f (Prompt tag))) z1)
+prompt f = unsafeMkEff (\z0 -> case newPromptTag# z0 of
+    (# z1, tag #) -> prompt# tag (unsafeRunEff (f (Prompt tag))) z1)
 
 control0 :: forall s a b ss ss0. Prompt ss0 a s -> ((Eff ss b -> Eff ss0 a) -> Eff ss0 a) -> Eff ss b
 control0 (Prompt tag) f = unsafeMkEff (\z0 ->
