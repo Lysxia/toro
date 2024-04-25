@@ -21,6 +21,7 @@ library
     exposed-modules:
       Toro.BluefinOverEffectful
       Toro.EffectfulOverBluefin
+      Toro.BluefinExtras
     build-depends:
       bluefin,
       bluefin-internal,
