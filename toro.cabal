@@ -23,6 +23,7 @@ library
       Toro.EffectfulOverBluefin
       Toro.BluefinExtras
       Toro.BluefinCont
+      Toro.BluefinHandler
     build-depends:
       bluefin,
       bluefin-internal,
