@@ -38,9 +38,9 @@ runPure (Eff m) = E.runPureEff m
 
 type (:&) = '(:)
 
-class η E.:> ε => η :> ε where
-instance η :> (η ': ε) where
-instance {-# INCOHERENT #-} η :> ε => η :> (η2 ': ε) where
+class η E.:> ε => η :> ε
+instance η :> (η ': ε)
+instance {-# INCOHERENT #-} η :> ε => η :> (η2 ': ε)
 
 newtype State s η = State (η :~: E.State s)
 
