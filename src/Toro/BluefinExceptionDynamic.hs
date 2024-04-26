@@ -19,8 +19,10 @@ import qualified Bluefin.Internal as B
 import Bluefin.Eff
 import Bluefin.IO
 
+-- | Capability to throw dynamic exceptions.
 data DynExn (ex :: Effects) = DynExn
 
+-- | Refine an 'IOE' capability to a 'DynExn'.
 ioeToDynExn :: IOE io -> DynExn io
 ioeToDynExn _ = DynExn
 

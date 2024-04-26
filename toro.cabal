@@ -24,6 +24,7 @@ library
       Toro.BluefinExtras
       Toro.BluefinCont
       Toro.BluefinHandler
+      Toro.BluefinHandlerCancellable
       Toro.BluefinLib
       Toro.BluefinExceptionDynamic
     build-depends:
