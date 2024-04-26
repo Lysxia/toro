@@ -31,7 +31,7 @@
 --
 -- @
 -- 'Toro.BluefinHandler.handle' (\\_e _k -> pure Nothing)
---   ('Toro.BluefinExceptionDynamic.bracket' ex acquire release (\\_ -> call h Fail))
+--   ('Toro.BluefinExceptionDynamic.bracket' ex acquire release (\\_ -> 'call' h Fail))
 -- @
 --
 -- @bracket@ is intended to ensure that the acquired resource is released even if the bracketed
@@ -43,12 +43,12 @@
 -- ==== Solution
 --
 -- Using 'handle' from this module instead lets us cancel the continuation with 'discontinue'.
--- Cancellable continuations require an 'IOE' handle.
+-- Cancellable continuations require a 'DynExn' or 'IOE' handle.
 --
 -- @
 -- 'handle'' io (\\_e k ->
 --      try @CancelContinuation ('discontinueIO' k CancelContinuation) >> pure Nothing)
---   ('Toro.BluefinExceptionDynamic.bracket' acquire release (\\_ -> call h Fail))
+--   ('Toro.BluefinExceptionDynamic.bracket' acquire release (\\_ -> 'call' h Fail))
 --
 -- data CancelContinuation = CancelContinuation deriving (Show, Exception)
 -- @
@@ -107,5 +107,15 @@ discontinue :: (Exception e, ex :> es0) => DynExn ex -> (Eff es0 b -> Eff es a) 
 discontinue ex k e = k (throw ex e)
 
 -- | 'discontinue' with an 'IOE' handle instead of the more restrictive 'DynExn'.
+--
+-- Note that different outcomes are possible depending on your handled computation.
+-- Be sure to handle them appropriately.
+--
+-- - A common situation is that the continuation will rethrow the initial exception,
+--   then you can just catch it.
+-- - The continuation may throw a different exception, so you should be
+--   careful to catch the right exception.
+-- - The continuation may also catch your exception and terminate normally
+--   with a result of type @a@.
 discontinueIO :: (Exception e, io :> es0) => IOE io -> (Eff es0 b -> Eff es a) -> e -> Eff es a
 discontinueIO io = discontinue (ioeToDynExn io)
