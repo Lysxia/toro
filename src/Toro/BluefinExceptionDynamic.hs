@@ -7,9 +7,10 @@
 -- This is the vanilla exception mechanism from @IO@.
 -- Use this module to handle exceptions from external (non-bluefin) APIs.
 --
--- This module also enables the use of algebraic effect handlers
--- ("Toro.BluefinHandlerCancellable") while managing resources where clean up happens
--- in exception handlers (e.g., using 'bracket', 'finally').
+-- This module also enables a style of resource management where clean up happens
+-- in exception handlers (e.g., using 'bracket', 'finally'). This is also compatible
+-- with algebraic effect handlers using cancellable continuations
+-- ("Toro.BluefinHandlerCancellable").
 module Toro.BluefinExceptionDynamic
   ( DynExn
   , ioeToDynExn
