@@ -36,7 +36,7 @@
 --
 -- @bracket@ is intended to ensure that the acquired resource is released even if the bracketed
 -- function throws an exception. However, when the @Fail@ operation is called, the handler
--- @(\_e _k -> pure Nothing)@ discards the continuation @_k@ which contains the
+-- @(\\_e _k -> pure Nothing)@ discards the continuation @_k@ which contains the
 -- exception handler installed by @bracket@.
 -- The resource leaks because @release@ will never be called.
 --
